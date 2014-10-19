@@ -1,0 +1,16 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  '.overlayer':
+      'Enable pdf-opener': 'pdf-opener:toggle'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'pdf-opener'
+      'submenu': [
+        { 'label': 'Toggle', 'command': 'pdf-opener:toggle' }
+      ]
+    ]
+  }
+]
