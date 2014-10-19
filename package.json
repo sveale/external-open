@@ -2,7 +2,7 @@
   "name": "external-open",
   "main": "./lib/external-open",
   "version": "0.2.0",
-  "description": "When PDF files are double clicked in tree-view they are opened with native PDF viewer",
+  "description": "Open files of specific extension externally",
   "repository": "https://github.com/sveale/external-open",
   "license": "MIT",
   "engines": {
