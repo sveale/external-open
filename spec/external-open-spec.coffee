@@ -1,5 +1,5 @@
 {WorkspaceView} = require 'atom'
-PdfOpener = require '../lib/pdf-opener'
+PdfOpener = require '../lib/external-open'
 
 # Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 #
@@ -11,20 +11,20 @@ describe "PdfOpener", ->
 
   beforeEach ->
     atom.workspaceView = new WorkspaceView
-    activationPromise = atom.packages.activatePackage('pdf-opener')
+    activationPromise = atom.packages.activatePackage('external-open')
 
-  describe "when the pdf-opener:toggle event is triggered", ->
+  describe "when the external-open:toggle event is triggered", ->
     it "attaches and then detaches the view", ->
-      expect(atom.workspaceView.find('.pdf-opener')).not.toExist()
+      expect(atom.workspaceView.find('.external-open')).not.toExist()
 
       # This is an activation event, triggering it will cause the package to be
       # activated.
-      atom.workspaceView.trigger 'pdf-opener:toggle'
+      atom.workspaceView.trigger 'external-open:toggle'
 
       waitsForPromise ->
         activationPromise
 
       runs ->
-        expect(atom.workspaceView.find('.pdf-opener')).toExist()
-        atom.workspaceView.trigger 'pdf-opener:toggle'
-        expect(atom.workspaceView.find('.pdf-opener')).not.toExist()
+        expect(atom.workspaceView.find('.external-open')).toExist()
+        atom.workspaceView.trigger 'external-open:toggle'
+        expect(atom.workspaceView.find('.external-open')).not.toExist()
