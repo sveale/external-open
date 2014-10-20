@@ -1,7 +1,7 @@
+ExternalOpenView = null
 open = null
 fs = null
 path = null
-{Pane} = require 'atom'
 
 module.exports =
   config:
@@ -14,11 +14,13 @@ module.exports =
         type: 'string'
 
   activate: ->
-    atom.workspace.addOpener (uriToOpen) ->
+    atom.workspace.addOpener (uri) ->
       path = require 'path'
-      if (path.extname(uriToOpen) in atom.config.get 'external-open.extensions')
+      if (path.extname(uri) in atom.config.get 'external-open.extensions')
         fs = require 'fs'
-        if (fs.existsSync(uriToOpen))
+        if (fs.existsSync(uri))
           open = require 'open'
-          open(uriToOpen)
-          null
+          ExternalOpenView ?= require './external-open-view'
+          view = new ExternalOpenView({uri})
+          open(uri, (=> view.destroy()))
+          view
