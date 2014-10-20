@@ -22,5 +22,8 @@ module.exports =
           open = require 'open'
           ExternalOpenView ?= require './external-open-view'
           view = new ExternalOpenView({uri})
-          open(uri, (=> view.destroy()))
+          open(uri, (=>
+            if atom.workspace.getActivePaneItem() is view
+              atom.workspaceView.trigger 'core:close'
+          ))
           view

@@ -4,7 +4,7 @@ path = require 'path'
 module.exports =
   class ExternalOpenView extends ScrollView
     @content: ->
-      @div class: 'external-open-view pane-item', =>
+      @div class: 'external-open pane-item', =>
         @ul class: 'background-message centered', =>
           @li 'Opening in external program...'
 
