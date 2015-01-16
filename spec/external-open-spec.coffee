@@ -12,5 +12,3 @@ describe "ExternalOpen", ->
   beforeEach ->
     atom.workspaceView = new WorkspaceView
     activationPromise = atom.packages.activatePackage('external-open')
-
-  

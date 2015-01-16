@@ -1,3 +1,7 @@
+'context-menu':
+  '.tree-view .file > .name':
+    'External open': 'external-open:file'
+
 'menu': [
   {
     'label': 'Packages'
