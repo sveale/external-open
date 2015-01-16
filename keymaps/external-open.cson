@@ -1,2 +1,5 @@
-'.atom-workspace':
-  'ctrl-alt o': 'external-open:file'
+'.platform-darwin':
+  'cmd-shift-o': 'external-open:file'
+
+'.platform-win32, .platform-linux':
+  'ctrl-shift-o': 'external-open:file'
