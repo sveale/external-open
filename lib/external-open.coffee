@@ -6,7 +6,7 @@ path = null
 module.exports =
   config:
     extensions:
-      title: 'Extensions to open in external program'
+      title: 'Extensions to always open in external program'
       description: 'Will open files of specified types in system default program'
       type: 'array'
       default: ['.pdf']
@@ -14,6 +14,15 @@ module.exports =
         type: 'string'
 
   activate: ->
+    atom.commands.add 'atom-pane',
+      'external-open:file': ->
+        fs = require 'fs'
+        uri = getActivePath()
+        if (fs.existsSync(uri))
+          open = require 'open'
+          open(uri, ->)
+
+
     atom.workspace.addOpener (uri) ->
       path = require 'path'
       if (path.extname(uri) in atom.config.get 'external-open.extensions')
@@ -27,3 +36,5 @@ module.exports =
               atom.workspaceView.trigger 'core:close'
           ))
           view
+getActivePath = ->
+  atom.workspace.getActivePaneItem()?.getPath?()

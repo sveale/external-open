@@ -1,15 +1,10 @@
-# See https://atom.io/docs/latest/creating-a-package#menus for more details
-'context-menu':
-  '.overlayer':
-      'Enable external-open': 'external-open:toggle'
-
 'menu': [
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'external-open'
+      'label': 'External Open'
       'submenu': [
-        { 'label': 'Toggle', 'command': 'external-open:toggle' }
+        { 'label': 'File', 'command', 'external-open:file'}
       ]
     ]
   }
