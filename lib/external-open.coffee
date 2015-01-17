@@ -13,9 +13,9 @@ module.exports =
         type: 'string'
 
   activate: ->
-    atom.commands.add 'atom-pane', 'external-open:file', externalOpenFromPopup
+    atom.commands.add 'atom-pane', 'external-open:open-in-external-program', externalOpenFromPopup
 
-    atom.commands.add '.tree-view .file .name', 'external-open:file', externalOpenFromTree
+    atom.commands.add '.tree-view .file .name', 'external-open:open-in-external-program', externalOpenFromTree
 
     atom.workspace.addOpener (uri) =>
       path = require 'path'
@@ -28,10 +28,10 @@ getActivePath = ->
 
 externalOpenFromPopup = ->
   uri = getActivePath()
-  externalOpenUri(uri)
+  externalOpenUri(uri) if uri?
 
 externalOpenFromTree = ({target}) ->
-  externalOpenUri(target.dataset.path)
+  externalOpenUri(target.dataset.path) if target.dataset.path?
 
 externalOpenUri = (uri) ->
   fs ?= require 'fs'

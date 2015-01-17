@@ -1,6 +1,6 @@
 'context-menu':
   '.tree-view .file > .name':
-    'External open': 'external-open:file'
+    'Open in external program': 'external-open:open-in-external-program'
 
 'menu': [
   {
@@ -8,7 +8,7 @@
     'submenu': [
       'label': 'External Open'
       'submenu': [
-        { 'label': 'File', 'command', 'external-open:file'}
+        { 'label': 'Open in external program', 'command', 'external-open:open-in-external-program'}
       ]
     ]
   }
