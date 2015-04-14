@@ -12,7 +12,7 @@
     "open": ">=0.0.5",
     "path": "*",
     "fs": "*",
-    "q": ">=1.0.1"
+    "atom-space-pen-views": "*"
   },
   "author": {
     "name": "Sverre Aleksandersen",

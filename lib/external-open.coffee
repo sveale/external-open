@@ -1,6 +1,8 @@
 open = null
 fs = null
 path = null
+WaitView = null
+
 
 module.exports =
   config:
@@ -20,8 +22,13 @@ module.exports =
     atom.workspace.addOpener (uri) =>
       path = require 'path'
       if (path.extname(uri) in atom.config.get 'external-open.extensions')
-        externalOpenUri(uri)
-        false
+        WaitView ?= require './wait-view'
+        waitView = new WaitView
+        externalOpenUri(uri, waitView)
+        return waitView
+      else
+        return
+
 
 getActivePath = ->
   atom.workspace.getActivePaneItem()?.getPath?()
@@ -33,11 +40,11 @@ externalOpenFromPopup = ->
 externalOpenFromTree = ({target}) ->
   externalOpenUri(target.dataset.path) if target.dataset.path?
 
-externalOpenUri = (uri) ->
+externalOpenUri = (uri, waitView) ->
   fs ?= require 'fs'
   fs.exists(uri, ((exists) ->
     if (exists)
       open ?= require 'open'
-      open(uri)
+      open(uri, (=> atom.workspace.paneForItem(waitView).destroyItem(waitView)))
     )
   )
