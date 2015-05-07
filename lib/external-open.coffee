@@ -45,6 +45,6 @@ externalOpenUri = (uri, waitView) ->
   fs.exists(uri, ((exists) ->
     if (exists)
       open ?= require 'open'
-      open(uri, (=> atom.workspace.paneForItem(waitView).destroyItem(waitView)))
+      open(uri, (=> atom.workspace.paneForItem(waitView).destroyItem(waitView) if waitView?))
     )
   )

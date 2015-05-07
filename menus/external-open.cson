@@ -1,6 +1,9 @@
 'context-menu':
-  '.tree-view .file > .name':
-    'Open in external program': 'external-open:open-in-external-program'
+  '.tree-view .file > .name': [
+    {'type': 'separator'}
+    {'label': 'Open in default program', 'command': 'external-open:open-in-external-program'}
+    {'type': 'separator'}
+  ]
 
 'menu': [
   {
@@ -8,7 +11,7 @@
     'submenu': [
       'label': 'External Open'
       'submenu': [
-        { 'label': 'Open in external program', 'command', 'external-open:open-in-external-program'}
+        { 'label': 'Open in default program', 'command', 'external-open:open-in-external-program'}
       ]
     ]
   }
