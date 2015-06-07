@@ -1,7 +1,7 @@
 {
   "name": "external-open",
   "main": "./lib/external-open",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Open files of specific extension externally",
   "repository": "https://github.com/sveale/external-open",
   "license": "MIT",
