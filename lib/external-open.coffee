@@ -21,7 +21,7 @@ module.exports =
 
     atom.workspace.addOpener (uri) =>
       path = require 'path'
-      if (path.extname(uri) in atom.config.get 'external-open.extensions')
+      if (path.extname(uri) in atom.config.get('external-open.extensions')) or (path.extname(uri).substr(1) in atom.config.get('external-open.extensions'))
         WaitView ?= require './wait-view'
         waitView = new WaitView
         externalOpenUri(uri, waitView)
