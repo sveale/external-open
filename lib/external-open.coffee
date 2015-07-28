@@ -2,6 +2,7 @@ open = null
 fs = null
 path = null
 WaitView = null
+url = null
 
 
 module.exports =
@@ -20,14 +21,16 @@ module.exports =
     atom.commands.add '.tree-view .file .name', 'external-open:open-in-external-program', externalOpenFromTree
 
     atom.workspace.addOpener (uri) =>
-      path = require 'path'
-      if (path.extname(uri) in atom.config.get('external-open.extensions')) or (path.extname(uri).substr(1) in atom.config.get('external-open.extensions'))
+      url ?= require 'url'
+      path ?= require 'path'
+      pathname = url.parse(uri).pathname
+      if (path.extname(pathname) in atom.config.get('external-open.extensions')) or (path.extname(pathname).substr(1) in atom.config.get('external-open.extensions'))
         WaitView ?= require './wait-view'
         waitView = new WaitView
-        externalOpenUri(uri, waitView)
+        externalOpenUri(pathname, waitView)
         return waitView
       else
-        return
+        return undefined
 
 
 getActivePath = ->
