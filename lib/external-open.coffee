@@ -56,7 +56,7 @@ module.exports =
       if (path.extname(pathname) in atom.config.get('external-open.extensions')) or (path.extname(pathname).substr(1) in atom.config.get('external-open.extensions'))
         WaitView ?= require './wait-view'
         waitView = new WaitView
-        externalOpenUri(pathname, waitView)
+        externalOpenUri(decodeURI(pathname), waitView)
         return waitView
       else
         return
@@ -75,8 +75,11 @@ externalOpenFromTree = ({target}) ->
 externalOpenUri = (uri, waitView) ->
   fs ?= require 'fs'
   fs.exists(uri, ((exists) ->
-    if (exists)
+    if exists
       open ?= require 'open'
       open(uri, (=> atom.workspace.paneForItem(waitView)?.destroyItem(waitView) if waitView?))
+    else
+      setTimeout((() => atom.workspace.paneForItem(waitView)?.destroyItem(waitView) if waitView?), 2000)
+      console.error "#{uri} is not a file!"
     )
   )
