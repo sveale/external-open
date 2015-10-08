@@ -27,7 +27,7 @@ module.exports =
     getIconName: ->
       'spinner'
 
-    onDidChangeTItle: -> new Disposable ->
+    onDidChangeTitle: -> new Disposable ->
 
     onDidChangeModified: -> new Disposable ->
 
@@ -35,7 +35,7 @@ module.exports =
       other instanceof WaitView
 
     destroy: ->
-      @disposables?.dipose()
+      @disposables?.dispose()
 
     cancelled: ->
       @hide()
