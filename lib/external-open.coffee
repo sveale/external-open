@@ -19,6 +19,10 @@ module.exports =
       description: "Related to issue #5"
       type: 'boolean'
       default: false
+    disableWaitTab:
+      title: 'Disable the wait tab'
+      type: 'boolean'
+      default: false
 
   activate: ->
     @hashTable = []
@@ -54,10 +58,14 @@ module.exports =
       setTimeout((() => @hashTable[pathname] = undefined), 2000)
 
       if (path.extname(pathname) in atom.config.get('external-open.extensions')) or (path.extname(pathname).substr(1) in atom.config.get('external-open.extensions'))
-        WaitView ?= require './wait-view'
-        waitView = new WaitView
-        externalOpenUri(decodeURI(pathname), waitView)
-        return waitView
+        if atom.config.get('external-open.disableWaitTab') is false
+          WaitView ?= require './wait-view'
+          waitView = new WaitView
+          externalOpenUri(decodeURI(pathname), waitView)
+          return waitView
+        else
+          externalOpenUri(decodeURI(pathname), undefined)
+          return true
       else
         return
 
